@@ -1,15 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TaskController;
 
-Route::get('/', function () {
-    redirect()->route('tasks.index');
-});
-
-Route::get('/tasks', function () {
-    return view('index');
-})->name('tasks.index');
-
-Route::get('/{id}', function ($id) {
-    return 'One single task';
-})->name('tasks.show');
+Route::get('/tasks', [TaskController::class, 'index'])->name("tasks.index");
+Route::get('/tasks/{id}', [TaskController::class, 'show'])->name("task.show");
+Route::post('/tasks/create', [TaskController::class, 'store'])->name("tasks.store");
+Route::put('/tasks/{id}/update', [TaskController::class, 'update'])->name("task.update");
+Route::delete('/tasks/{id}', [TaskController::class, 'delete'])->name('task.delete');
