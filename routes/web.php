@@ -8,4 +8,5 @@ Route::post('/tasks/store', [TaskController::class, 'store'])->name("tasks.store
 Route::get('/tasks/create', [TaskController::class, 'create'])->name("tasks.create");
 Route::get('/tasks/{id}', [TaskController::class, 'show'])->name("tasks.show");
 Route::delete('/tasks/{id}', [TaskController::class, 'delete'])->name('tasks.delete');
+Route::post('/tasks/{id}/done', [TaskController::class, 'markAsDone'])->name('tasks.done');
 Route::put('/tasks/{id}/update', [TaskController::class, 'update'])->name("tasks.update");

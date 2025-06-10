@@ -24,6 +24,13 @@ class TaskController extends Controller
         return view('tasks.create');
     }
 
+    public function markAsDone($id)
+    {
+        $task = Task::findOrFail($id);
+        $task->is_done = true;
+        return redirect()->route('tasks.index')->with('success', 'Задача успешно выполнена');
+    }
+
 
     public function store(Request $request)
     {
@@ -53,8 +60,7 @@ class TaskController extends Controller
 
     public function delete($id)
     {
-        $task = Task::findOrFail($id);
-        $task->delete();
+        Task::destroy($id);
         return redirect()->route('tasks.index')->with('success', 'Задача успешно удалена');
     }
 }
