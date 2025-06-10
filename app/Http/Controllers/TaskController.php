@@ -29,7 +29,7 @@ class TaskController extends Controller
         $task->title = $data['title'];
         $task->description = $data['description'];
         $task->save();
-        return redirect()->route('tasks.index')->with('success', 'Task was added');
+        return redirect()->route('tasks.index')->with('success', 'Задача успешно создана!');
     }
 
     public function update($id, Request $request)
@@ -42,13 +42,13 @@ class TaskController extends Controller
         $task->title = $data['title'];
         $task->description = $data['description'];
         $task->save();
-        return redirect()->route('tasks.index')->with('success', 'Task was updated');
+        return redirect()->route('tasks.index')->with('success', 'Задача успешно обновлена !');
     }
 
     public function delete($id)
     {
         $task = Task::findOrFail($id);
         $task->delete();
-        return redirect()->route('tasks.index')->with('Success', 'Task was deleted');
+        return redirect()->route('tasks.index')->with('success', 'Задача успешно удалена');
     }
 }
