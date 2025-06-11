@@ -48,8 +48,8 @@ class TaskController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'title' => 'required',
-            'description' => 'required',
+            'title' => 'required|string',
+            'description' => 'nullable|string',
         ]);
         $task = new Task;
         $task->title = $data['title'];
