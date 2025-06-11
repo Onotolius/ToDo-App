@@ -7,9 +7,15 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $tasks = Task::all();
+        if ($request->query('filter') == 'done') {
+            $tasks = Task::where('is_done', true)->get();
+        } elseif ($request->query('filter') == 'undone') {
+            $tasks = Task::where('is_done', false)->get();
+        } else {
+            $tasks = Task::all();
+        }
         return view('tasks.index', ['tasks' => $tasks]);
     }
 
@@ -34,6 +40,7 @@ class TaskController extends Controller
     {
         $task = Task::findOrFail($id);
         $task->is_done = true;
+        $task->save();
         return redirect()->route('tasks.index')->with('success', 'Задача успешно выполнена');
     }
 
